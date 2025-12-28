@@ -1,0 +1,30 @@
+╔════════════════════════════════════════════════════════════════╗
+║     NexusAI EKS Cluster - Deployment Information              ║
+╚════════════════════════════════════════════════════════════════╝
+
+Cluster Name: nexusai-cluster
+Region: eu-north-1
+Kubernetes Version: 1.31
+
+Node Group:
+  Name: nexusai-nodes
+  Instance Type: t3.small
+  Nodes: 2 (min: 2, max: 4)
+  Status: ACTIVE ✅
+
+Load Balancer:
+  DNS: aad3385e8ac9f4fdd85e9bbe50282f26-2ade025f04ab1ee1.elb.eu-north-1.amazonaws.com
+  
+Next Steps:
+1. Update k8s/ingress.yaml with the Load Balancer DNS
+2. Generate secrets: ./k8s/generate-secrets.sh
+3. Deploy NexusAI: ./k8s/deploy.sh
+
+Management Commands:
+  View cluster: eksctl get cluster --name nexusai-cluster --region eu-north-1
+  View nodes: kubectl get nodes
+  View pods: kubectl get pods -n nexusai
+  View services: kubectl get svc -n nexusai
+  View ingress: kubectl get ingress -n nexusai
+  
+Cluster created: 2025-12-28

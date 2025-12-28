@@ -1,0 +1,19 @@
+{
+    "addon": {
+        "addonName": "aws-ebs-csi-driver",
+        "clusterName": "nexusai-cluster",
+        "status": "DELETING",
+        "addonVersion": "v1.54.0-eksbuild.1",
+        "health": {
+            "issues": []
+        },
+        "addonArn": "arn:aws:eks:eu-north-1:839868753466:addon/nexusai-cluster/aws-ebs-csi-driver/60cdb219-dae9-b0c5-57d3-c617b4195cd0",
+        "createdAt": "2025-12-28T10:04:29.332000+01:00",
+        "modifiedAt": "2025-12-28T10:34:41.468000+01:00",
+        "serviceAccountRoleArn": "arn:aws:iam::839868753466:role/AmazonEKS_EBS_CSI_DriverRole",
+        "tags": {},
+        "namespaceConfig": {
+            "namespace": "kube-system"
+        }
+    }
+}
