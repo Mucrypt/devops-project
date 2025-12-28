@@ -53,7 +53,7 @@ ingress:
     # Uncomment when TLS is configured:
     # cert-manager.io/cluster-issuer: "letsencrypt-prod"
   hosts:
-    - host: nexusai.example.com
+    - host: chatbuilds.com
       paths:
         - path: /api
           pathType: Prefix
