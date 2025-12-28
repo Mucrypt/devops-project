@@ -2,28 +2,12 @@
 # Usage: helm upgrade --install nexusai ./infrastructure/helm/nexusai-chart -f infrastructure/helm/nexusai-chart/values-prod.yaml
 
 backend:
-  replicaCount: 3
-  image:
-    tag: v1.0.0  # Override with CI/CD
-  resources:
-    requests:
-      cpu: 200m
-      memory: 512Mi
-    limits:
-      cpu: 1000m
-      memory: 1Gi
-  hpa:
-    enabled: true
-    minReplicas: 3
-    maxReplicas: 20
-
-frontend:
   replicaCount: 2
   image:
     tag: v1.0.0  # Override with CI/CD
   resources:
     requests:
-      cpu: 200m
+      cpu: 100m
       memory: 256Mi
     limits:
       cpu: 500m
@@ -33,18 +17,34 @@ frontend:
     minReplicas: 2
     maxReplicas: 10
 
+frontend:
+  replicaCount: 2
+  image:
+    tag: v1.0.0  # Override with CI/CD
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+  hpa:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 5
+
 mongodb:
   persistence:
-    enabled: true
-    storageClass: gp3
+    enabled: false  # Disabled for now - use gp2 when enabling
+    storageClass: gp2
     size: 50Gi
   resources:
     requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
       cpu: 500m
       memory: 1Gi
-    limits:
-      cpu: 2000m
-      memory: 2Gi
 
 ingress:
   annotations:
