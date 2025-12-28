@@ -27,7 +27,7 @@ interface DocSection {
   items: {
     title: string;
     href: string;
-    icon?: any;
+    icon?: React.ComponentType<{ className?: string }>;
   }[];
 }
 
