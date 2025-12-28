@@ -52,10 +52,38 @@ if helm status $RELEASE_NAME -n $NAMESPACE &> /dev/null; then
     HELM_ACTION="upgrade"
 else
     echo "🆕 Helm release doesn't exist, installing..."
-    # Delete any manually created secrets that would conflict with Helm
-    echo "🧹 Cleaning up non-Helm managed secrets..."
+    # Delete any manually created resources that would conflict with Helm
+    echo "🧹 Cleaning up non-Helm managed resources..."
+    
+    # Delete secrets
     kubectl delete secret backend-secret -n $NAMESPACE --ignore-not-found=true
     kubectl delete secret mongodb-secret -n $NAMESPACE --ignore-not-found=true
+    
+    # Delete configmaps
+    kubectl delete configmap backend-config -n $NAMESPACE --ignore-not-found=true
+    
+    # Delete deployments and services
+    kubectl delete deployment nexusai-backend -n $NAMESPACE --ignore-not-found=true
+    kubectl delete deployment nexusai-frontend -n $NAMESPACE --ignore-not-found=true
+    kubectl delete deployment mongo-express -n $NAMESPACE --ignore-not-found=true
+    kubectl delete service nexusai-backend -n $NAMESPACE --ignore-not-found=true
+    kubectl delete service nexusai-frontend -n $NAMESPACE --ignore-not-found=true
+    kubectl delete service mongo-express -n $NAMESPACE --ignore-not-found=true
+    kubectl delete service mongodb -n $NAMESPACE --ignore-not-found=true
+    
+    # Delete statefulsets
+    kubectl delete statefulset mongodb -n $NAMESPACE --ignore-not-found=true
+    
+    # Delete HPAs
+    kubectl delete hpa nexusai-backend-hpa -n $NAMESPACE --ignore-not-found=true
+    kubectl delete hpa nexusai-frontend-hpa -n $NAMESPACE --ignore-not-found=true
+    
+    # Delete ingress
+    kubectl delete ingress nexusai-ingress -n $NAMESPACE --ignore-not-found=true
+    
+    echo "⏳ Waiting for resources to be deleted..."
+    sleep 10
+    
     HELM_ACTION="install"
 fi
 
