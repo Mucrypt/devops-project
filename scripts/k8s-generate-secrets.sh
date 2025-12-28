@@ -5,7 +5,7 @@
 
 set -e
 
-K8S_DIR="./k8s"
+K8S_DIR="./infrastructure/k8s"
 BLUE='\033[0;34m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'

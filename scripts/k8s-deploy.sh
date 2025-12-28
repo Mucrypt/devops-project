@@ -6,7 +6,7 @@
 set -e
 
 NAMESPACE="nexusai"
-K8S_DIR="./k8s"
+K8S_DIR="./infrastructure/k8s"
 
 echo "🚀 NexusAI Kubernetes Deployment"
 echo "=================================="
@@ -32,11 +32,11 @@ if [ ! -f "$K8S_DIR/mongodb-secret.yaml" ] || [ ! -f "$K8S_DIR/backend-secret.ya
     echo "❌ Secret files not found!"
     echo ""
     echo "Please generate secrets first by running:"
-    echo "   ./infrastructure/k8s/generate-secrets.sh"
+    echo "   ./scripts/k8s-generate-secrets.sh"
     echo ""
     echo "Or manually create from templates:"
-    echo "   cp k8s/mongodb-secret.yaml.example k8s/mongodb-secret.yaml"
-    echo "   cp k8s/backend-secret.yaml.example k8s/backend-secret.yaml"
+    echo "   cp infrastructure/k8s/mongodb-secret.yaml.example infrastructure/k8s/mongodb-secret.yaml"
+    echo "   cp infrastructure/k8s/backend-secret.yaml.example infrastructure/k8s/backend-secret.yaml"
     echo "   # Then edit and add your actual secrets"
     exit 1
 fi

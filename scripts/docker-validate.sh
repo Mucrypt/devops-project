@@ -24,9 +24,9 @@ check_file() {
 }
 
 echo "📁 Required Files:"
-check_file "docker-compose.yml"
+check_file "infrastructure/docker-compose.yml"
 check_file ".env.example"
-check_file "docker-setup.sh"
+check_file "scripts/docker-setup.sh"
 check_file "backend/Dockerfile"
 check_file "backend/.dockerignore"
 check_file "chat-to-code-38/Dockerfile"
@@ -53,9 +53,9 @@ if [ $checks_failed -eq 0 ]; then
     echo -e "${GREEN}✅ All files are in place!${NC}"
     echo ""
     echo "Ready to build! Run:"
-    echo "  ./docker-setup.sh"
+    echo "  ./scripts/docker-setup.sh"
     echo "or"
-    echo "  docker-compose up -d --build"
+    echo "  docker-compose -f infrastructure/docker-compose.yml up -d --build"
     exit 0
 else
     echo -e "${RED}❌ Some files are missing${NC}"

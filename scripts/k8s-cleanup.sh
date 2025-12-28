@@ -6,7 +6,7 @@
 set -e
 
 NAMESPACE="nexusai"
-K8S_DIR="./k8s"
+K8S_DIR="./infrastructure/k8s"
 
 echo "🗑️  NexusAI Kubernetes Cleanup"
 echo "=============================="

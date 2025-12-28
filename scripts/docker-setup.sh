@@ -37,8 +37,20 @@ if [ ! -f .env ]; then
     fi
 fi
 
+# Stop existing containers if any
+echo -e "${BLUE}🧹 Checking for existing containers...${NC}"
+if docker ps -a --filter "name=nexusai-" --format "{{.Names}}" | grep -q "nexusai"; then
+    echo -e "${YELLOW}⚠️  Found existing NexusAI containers. Stopping and removing...${NC}"
+    docker-compose -f infrastructure/docker-compose.yml down 2>/dev/null || true
+    docker stop $(docker ps -a --filter "name=nexusai-" --format "{{.Names}}") 2>/dev/null || true
+    docker rm $(docker ps -a --filter "name=nexusai-" --format "{{.Names}}") 2>/dev/null || true
+    echo -e "${GREEN}✅ Cleanup complete${NC}\n"
+else
+    echo -e "${GREEN}✅ No existing containers found${NC}\n"
+fi
+
 echo -e "${BLUE}📦 Building Docker images...${NC}\n"
-docker-compose build
+docker-compose -f infrastructure/docker-compose.yml build
 
 if [ $? -ne 0 ]; then
     echo -e "${RED}❌ Build failed${NC}"
@@ -48,7 +60,7 @@ fi
 echo -e "\n${GREEN}✅ Build successful${NC}\n"
 
 echo -e "${BLUE}🚀 Starting services...${NC}\n"
-docker-compose up -d
+docker-compose -f infrastructure/docker-compose.yml up -d
 
 if [ $? -ne 0 ]; then
     echo -e "${RED}❌ Failed to start services${NC}"
@@ -63,7 +75,7 @@ sleep 10
 
 # Check service status
 echo -e "${BLUE}📊 Service Status:${NC}\n"
-docker-compose ps
+docker-compose -f infrastructure/docker-compose.yml ps
 
 echo -e "\n${BLUE}🔍 Health Checks:${NC}\n"
 
@@ -85,7 +97,7 @@ fi
 
 # Check MongoDB
 echo -n "MongoDB: "
-if docker-compose exec -T mongodb mongosh --quiet --eval "db.runCommand('ping').ok" > /dev/null 2>&1; then
+if docker-compose -f infrastructure/docker-compose.yml exec -T mongodb mongosh --quiet --eval "db.runCommand('ping').ok" > /dev/null 2>&1; then
     echo -e "${GREEN}✅ Healthy${NC}"
 else
     echo -e "${RED}❌ Not responding${NC}"
@@ -99,9 +111,9 @@ echo -e "  API Health: ${GREEN}http://localhost:5000/health${NC}"
 echo -e "  MongoDB: ${GREEN}mongodb://nexusai:nexusai123@localhost:27017/nexusai${NC}\n"
 
 echo -e "${BLUE}Useful commands:${NC}"
-echo -e "  View logs: ${YELLOW}docker-compose logs -f${NC}"
-echo -e "  Stop services: ${YELLOW}docker-compose down${NC}"
-echo -e "  Restart services: ${YELLOW}docker-compose restart${NC}"
-echo -e "  Check status: ${YELLOW}docker-compose ps${NC}\n"
+echo -e "  View logs: ${YELLOW}docker-compose -f infrastructure/docker-compose.yml logs -f${NC}"
+echo -e "  Stop services: ${YELLOW}docker-compose -f infrastructure/docker-compose.yml down${NC}"
+echo -e "  Restart services: ${YELLOW}docker-compose -f infrastructure/docker-compose.yml restart${NC}"
+echo -e "  Check status: ${YELLOW}docker-compose -f infrastructure/docker-compose.yml ps${NC}\n"
 
 echo -e "${BLUE}📚 For more information, see DOCKER_SETUP.md${NC}\n"

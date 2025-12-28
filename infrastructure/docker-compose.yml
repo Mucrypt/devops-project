@@ -45,7 +45,7 @@ services:
   # Backend API
   backend:
     build:
-      context: ./backend
+      context: ../backend
       dockerfile: Dockerfile
     container_name: nexusai-backend
     restart: unless-stopped
@@ -72,7 +72,7 @@ services:
       mongodb:
         condition: service_healthy
     volumes:
-      - ./backend/logs:/app/logs
+      - ../backend/logs:/app/logs
     networks:
       - nexusai-network
     healthcheck:
@@ -85,7 +85,7 @@ services:
   # Frontend
   frontend:
     build:
-      context: ./chat-to-code-38
+      context: ../chat-to-code-38
       dockerfile: Dockerfile
     container_name: nexusai-frontend
     restart: unless-stopped
@@ -96,7 +96,7 @@ services:
     networks:
       - nexusai-network
     healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80/"]
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1:80/"]
       interval: 30s
       timeout: 10s
       retries: 3
