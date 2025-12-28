@@ -1,0 +1,70 @@
+# Production environment values
+# Usage: helm upgrade --install nexusai ./infrastructure/helm/nexusai-chart -f infrastructure/helm/nexusai-chart/values-prod.yaml
+
+backend:
+  replicaCount: 3
+  image:
+    tag: v1.0.0  # Override with CI/CD
+  resources:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+  hpa:
+    enabled: true
+    minReplicas: 3
+    maxReplicas: 20
+
+frontend:
+  replicaCount: 2
+  image:
+    tag: v1.0.0  # Override with CI/CD
+  resources:
+    requests:
+      cpu: 200m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+  hpa:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 10
+
+mongodb:
+  persistence:
+    enabled: true
+    storageClass: gp3
+    size: 50Gi
+  resources:
+    requests:
+      cpu: 500m
+      memory: 1Gi
+    limits:
+      cpu: 2000m
+      memory: 2Gi
+
+ingress:
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  hosts:
+    - host: nexusai.example.com
+      paths:
+        - path: /api
+          pathType: Prefix
+          backend:
+            serviceName: nexusai-backend
+            servicePort: 5000
+        - path: /
+          pathType: Prefix
+          backend:
+            serviceName: nexusai-frontend
+            servicePort: 80
+  tls:
+    - secretName: nexusai-tls
+      hosts:
+        - nexusai.example.com

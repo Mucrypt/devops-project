@@ -123,13 +123,13 @@ volumeClaimTemplates:
 ### Step 4: Generate Secrets
 
 ```bash
-./k8s/generate-secrets.sh
+./infrastructure/k8s/generate-secrets.sh
 ```
 
 ### Step 5: Deploy NexusAI
 
 ```bash
-./k8s/deploy.sh
+./infrastructure/k8s/deploy.sh
 ```
 
 ### Step 6: Get Application URL
@@ -402,7 +402,7 @@ Already configured in `k8s/resource-quota.yaml` to prevent runaway costs.
 ### Delete Application
 
 ```bash
-./k8s/cleanup.sh
+./infrastructure/k8s/cleanup.sh
 ```
 
 ### Delete EKS Cluster
@@ -449,7 +449,7 @@ kubectl edit deployment cluster-autoscaler -n kube-system
 
 ### Use Spot Instances (Cost Savings)
 
-Update `eks-cluster-config.yaml`:
+Update `infrastructure/eks-cluster-config.yaml`:
 ```yaml
 managedNodeGroups:
   - name: nexusai-spot-nodes
@@ -494,4 +494,4 @@ For issues:
 
 ---
 
-**Ready to deploy? Start with:** `./k8s/create-eks-cluster.sh`
+**Ready to deploy? Start with:** `./infrastructure/k8s/create-eks-cluster.sh`

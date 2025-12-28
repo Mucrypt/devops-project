@@ -105,7 +105,7 @@ echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━�
 echo ""
 
 # Create cluster config file
-cat > eks-cluster-config.yaml << EOF
+cat > ../eks-cluster-config.yaml << EOF
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
@@ -181,7 +181,7 @@ addons:
 EOF
 
 echo -e "${YELLOW}Creating cluster with eksctl...${NC}"
-eksctl create cluster -f eks-cluster-config.yaml
+exsctl create cluster -f ../eks-cluster-config.yaml
 
 # Update kubeconfig
 echo ""
@@ -259,14 +259,14 @@ if [ -n "$INGRESS_HOST" ]; then
     echo -e "${GREEN}✓ Load Balancer DNS: $INGRESS_HOST${NC}"
     echo ""
     echo -e "${YELLOW}📝 Next Steps:${NC}"
-    echo "1. Update k8s/ingress.yaml with this domain:"
+    echo "1. Update infrastructure/k8s/ingress.yaml with this domain:"
     echo "   host: $INGRESS_HOST"
     echo ""
     echo "2. Generate secrets:"
-    echo "   ./k8s/generate-secrets.sh"
+    echo "   ./infrastructure/k8s/generate-secrets.sh"
     echo ""
     echo "3. Deploy NexusAI:"
-    echo "   ./k8s/deploy.sh"
+    echo "   ./infrastructure/k8s/deploy.sh"
     echo ""
     echo "4. Get Ingress IP after deployment:"
     echo "   kubectl get ingress -n nexusai"
@@ -277,7 +277,7 @@ else
 fi
 
 echo ""
-echo -e "${BLUE}💾 Cluster configuration saved to: eks-cluster-config.yaml${NC}"
+    echo -e "${BLUE}💾 Cluster configuration saved to: infrastructure/eks-cluster-config.yaml${NC}"
 echo ""
 
 # Save cluster info

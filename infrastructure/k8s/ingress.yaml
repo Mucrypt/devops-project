@@ -5,9 +5,8 @@ metadata:
   namespace: nexusai
   annotations:
     # NGINX Ingress Controller annotations
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
     # Rate limiting
     nginx.ingress.kubernetes.io/limit-rps: "100"
     # CORS
@@ -23,8 +22,25 @@ metadata:
     # Let's Encrypt (uncomment and configure for production SSL)
     # cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
-  ingressClassName: nginx  # Change based on your ingress controller (nginx, traefik, etc.)
+  ingressClassName: nginx
   rules:
+  - host: nexusai.local  # Custom domain for local testing
+    http:
+      paths:
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: nexusai-backend
+            port:
+              number: 5000
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nexusai-frontend
+            port:
+              number: 80
   - host: aad3385e8ac9f4fdd85e9bbe50282f26-2ade025f04ab1ee1.elb.eu-north-1.amazonaws.com  # AWS Load Balancer DNS
     http:
       paths:

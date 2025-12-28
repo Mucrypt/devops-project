@@ -19,9 +19,9 @@ build/
 .dockerignore
 
 # Kubernetes Secrets (NEVER commit these!)
-k8s/*-secret.yaml
-k8s/backend-secret.yaml
-k8s/mongodb-secret.yaml
+infrastructure/k8s/*-secret.yaml
+infrastructure/k8s/backend-secret.yaml
+infrastructure/k8s/mongodb-secret.yaml
 
 # IDE
 .vscode/

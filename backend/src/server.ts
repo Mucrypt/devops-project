@@ -47,6 +47,16 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Compression middleware
 app.use(compression());
 
+// Health check endpoint (BEFORE rate limiting - for Kubernetes probes)
+app.get('/health', (_req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'NexusAI Backend API is running',
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV
+  });
+});
+
 // Logging middleware
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -58,18 +68,8 @@ if (process.env.NODE_ENV === 'development') {
   }));
 }
 
-// Rate limiting
+// Rate limiting (applied to all routes EXCEPT /health)
 app.use(rateLimiter);
-
-// Health check endpoint
-app.get('/health', (_req, res) => {
-  res.status(200).json({
-    success: true,
-    message: 'NexusAI Backend API is running',
-    timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV
-  });
-});
 
 // API Routes
 app.use('/api/auth', authRoutes);

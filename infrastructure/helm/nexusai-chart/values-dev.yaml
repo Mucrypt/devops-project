@@ -1,0 +1,42 @@
+# Development environment values
+# Usage: helm upgrade --install nexusai ./infrastructure/helm/nexusai-chart -f infrastructure/helm/nexusai-chart/values-dev.yaml
+
+backend:
+  replicaCount: 1
+  image:
+    tag: dev  # Override with CI/CD
+  hpa:
+    enabled: false
+
+frontend:
+  replicaCount: 1
+  image:
+    tag: dev  # Override with CI/CD
+  hpa:
+    enabled: false
+
+mongodb:
+  persistence:
+    enabled: false  # Use emptyDir in dev
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 250m
+      memory: 512Mi
+
+ingress:
+  hosts:
+    - host: nexusai-dev.local
+      paths:
+        - path: /api
+          pathType: Prefix
+          backend:
+            serviceName: nexusai-backend
+            servicePort: 5000
+        - path: /
+          pathType: Prefix
+          backend:
+            serviceName: nexusai-frontend
+            servicePort: 80

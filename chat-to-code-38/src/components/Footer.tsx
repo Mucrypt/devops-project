@@ -1,4 +1,5 @@
 import { Sparkles, Github, Twitter, Linkedin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -17,13 +18,13 @@ const Footer = () => {
               Build beautiful apps and websites through natural conversation. The future of development is here.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center hover:bg-secondary/80 transition-colors">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center hover:bg-secondary/80 transition-colors">
                 <Twitter className="w-5 h-5 text-muted-foreground" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center hover:bg-secondary/80 transition-colors">
+              <a href="https://github.com/Mucrypt/devops-project" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center hover:bg-secondary/80 transition-colors">
                 <Github className="w-5 h-5 text-muted-foreground" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center hover:bg-secondary/80 transition-colors">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center hover:bg-secondary/80 transition-colors">
                 <Linkedin className="w-5 h-5 text-muted-foreground" />
               </a>
             </div>
@@ -33,28 +34,28 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold text-foreground mb-4">Product</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Features</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Changelog</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Roadmap</a></li>
+              <li><a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a></li>
+              <li><a href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</a></li>
+              <li><a href="https://github.com/Mucrypt/devops-project/releases" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Changelog</a></li>
+              <li><a href="https://github.com/Mucrypt/devops-project" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Roadmap</a></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-semibold text-foreground mb-4">Resources</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Documentation</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Tutorials</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Community</a></li>
+              <li><Link to="/docs" className="text-muted-foreground hover:text-foreground transition-colors">Documentation</Link></li>
+              <li><Link to="/docs/quick-start" className="text-muted-foreground hover:text-foreground transition-colors">Quick Start</Link></li>
+              <li><a href="https://github.com/Mucrypt/devops-project" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">GitHub</a></li>
+              <li><a href="https://github.com/Mucrypt/devops-project/issues" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Community</a></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-semibold text-foreground mb-4">Company</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">About</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Careers</a></li>
+              <li><a href="https://github.com/Mucrypt" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">About</a></li>
+              <li><a href="https://github.com/Mucrypt/devops-project" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">Careers</a></li>
               <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Privacy</a></li>
               <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Terms</a></li>
             </ul>

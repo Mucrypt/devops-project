@@ -83,7 +83,7 @@ MongoDB is currently using **emptyDir** volumes, which means:
 
 **To enable persistence:**
 1. Fix EBS CSI driver IAM permissions
-2. Update `k8s/mongodb-statefulset.yaml` to use volumeClaimTemplates
+2. Update `infrastructure/k8s/mongodb-statefulset.yaml` to use volumeClaimTemplates
 3. Redeploy MongoDB
 
 ### Resource Constraints
@@ -137,7 +137,7 @@ To delete everything:
 
 ```bash
 # Delete application
-./k8s/cleanup.sh
+./infrastructure/k8s/cleanup.sh
 
 # Delete cluster
 eksctl delete cluster --name nexusai-cluster --region=eu-north-1

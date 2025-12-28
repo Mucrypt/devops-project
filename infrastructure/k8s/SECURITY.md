@@ -32,7 +32,7 @@ Run the secrets generator script:
 
 ```bash
 cd /home/mukulah/devops-project
-./k8s/generate-secrets.sh
+./infrastructure/k8s/generate-secrets.sh
 ```
 
 This script will:

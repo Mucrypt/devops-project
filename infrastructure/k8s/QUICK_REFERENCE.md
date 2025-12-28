@@ -25,7 +25,7 @@
 
 ### Deploy
 ```bash
-./k8s/deploy.sh                          # Deploy everything
+./infrastructure/k8s/deploy.sh                          # Deploy everything
 kubectl apply -f k8s/namespace.yaml      # Just namespace
 kubectl apply -f k8s/                    # All manifests
 ```
@@ -79,7 +79,7 @@ kubectl get events -n nexusai --sort-by='.lastTimestamp'
 
 ### Cleanup
 ```bash
-./k8s/cleanup.sh                         # Remove everything
+./infrastructure/k8s/cleanup.sh                         # Remove everything
 kubectl delete namespace nexusai         # Delete namespace only
 ```
 

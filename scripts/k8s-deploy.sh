@@ -32,7 +32,7 @@ if [ ! -f "$K8S_DIR/mongodb-secret.yaml" ] || [ ! -f "$K8S_DIR/backend-secret.ya
     echo "❌ Secret files not found!"
     echo ""
     echo "Please generate secrets first by running:"
-    echo "   ./k8s/generate-secrets.sh"
+    echo "   ./infrastructure/k8s/generate-secrets.sh"
     echo ""
     echo "Or manually create from templates:"
     echo "   cp k8s/mongodb-secret.yaml.example k8s/mongodb-secret.yaml"

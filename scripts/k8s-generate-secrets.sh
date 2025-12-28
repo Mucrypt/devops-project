@@ -178,5 +178,5 @@ echo "4. Update MongoDB URI in backend-configmap.yaml with your username/passwor
 echo ""
 echo -e "${GREEN}Next steps:${NC}"
 echo "1. Update k8s/backend-configmap.yaml with MongoDB connection string"
-echo "2. Run: ./k8s/deploy.sh"
+echo "2. Run: ./infrastructure/k8s/deploy.sh"
 echo ""

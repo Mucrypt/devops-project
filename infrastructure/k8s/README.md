@@ -97,7 +97,7 @@ spec:
 
 ### 4. Deploy
 ```bash
-./k8s/deploy.sh
+./infrastructure/k8s/deploy.sh
 ```
 
 ### 5. Verify Deployment
@@ -181,7 +181,7 @@ volumeClaimTemplates:
 
 ### Deploy All Resources
 ```bash
-./k8s/deploy.sh
+./infrastructure/k8s/deploy.sh
 ```
 
 ### Deploy Individual Components
@@ -473,7 +473,7 @@ nslookup nexusai-backend.nexusai.svc.cluster.local
 
 ### Delete All Resources
 ```bash
-./k8s/cleanup.sh
+./infrastructure/k8s/cleanup.sh
 ```
 
 ### Delete Specific Resources
