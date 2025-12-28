@@ -42,7 +42,12 @@ spec:
         volumeMounts:
         - name: mongodb-data
           mountPath: /data/db
-  {{- if .Values.mongodb.persistence.enabled }}
+{{- if not .Values.mongodb.persistence.enabled }}
+      volumes:
+      - name: mongodb-data
+        emptyDir: {}
+{{- end }}
+{{- if .Values.mongodb.persistence.enabled }}
   volumeClaimTemplates:
   - metadata:
       name: mongodb-data
@@ -52,8 +57,4 @@ spec:
       resources:
         requests:
           storage: {{ .Values.mongodb.persistence.size }}
-  {{- else }}
-      volumes:
-      - name: mongodb-data
-        emptyDir: {}
-  {{- end }}
+{{- end }}
