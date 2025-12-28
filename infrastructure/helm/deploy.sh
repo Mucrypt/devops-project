@@ -46,6 +46,19 @@ fi
 echo "📦 Ensuring namespace exists..."
 kubectl create namespace $NAMESPACE --dry-run=client -o yaml | kubectl apply -f -
 
+# Check if Helm release exists
+if helm status $RELEASE_NAME -n $NAMESPACE &> /dev/null; then
+    echo "🔄 Helm release exists, upgrading..."
+    HELM_ACTION="upgrade"
+else
+    echo "🆕 Helm release doesn't exist, installing..."
+    # Delete any manually created secrets that would conflict with Helm
+    echo "🧹 Cleaning up non-Helm managed secrets..."
+    kubectl delete secret backend-secret -n $NAMESPACE --ignore-not-found=true
+    kubectl delete secret mongodb-secret -n $NAMESPACE --ignore-not-found=true
+    HELM_ACTION="install"
+fi
+
 # Deploy with Helm
 echo "🎯 Deploying with Helm..."
 helm upgrade --install $RELEASE_NAME $CHART_PATH \
